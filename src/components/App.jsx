@@ -3,10 +3,27 @@ import Main from './Main'
 import Footer from './Footer'
 
 function App() {
+  
+  
+  
   return (
     <div>
       <Header />
-      <Main />
+      <Main
+      handleEditAvatarClick = {() => {
+        document.querySelector('.popup_addavatarprofile').classList.add('popup_opened');
+      }}
+      handleEditProfileClick = {() => {
+        document.querySelector('.popup_editprofile').classList.add('popup_opened');
+      }}
+      handleAddPlaceClick = {() => {
+        
+        document.querySelector('.popup_addprofile').classList.add('popup_opened');
+        
+      }}
+      
+      
+      />
       <Footer />
       
       <div className="popup popup_editprofile">
@@ -129,7 +146,7 @@ function App() {
         </div>
       </div>
 
-      <template id="template-cards">
+      {/* <template id="template-cards">
         <li>
           <figure className="places__element">
             <img className="places__photo" src="#" alt="..." />
@@ -143,7 +160,7 @@ function App() {
             <button type="button" className="places__card-delete"></button>
           </figure>
         </li>
-      </template>
+      </template> */}
     </div>
   );
 }
