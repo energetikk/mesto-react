@@ -1,7 +1,8 @@
 class Api {
   constructor(config) {
+    // eslint-disable-next-line no-unused-expressions
     this._url = config.url,
-    this._headers = config.headers;
+    this._headers = config.headers
   }
 
 
@@ -91,9 +92,7 @@ _checkResponse(res) {
   }
   return Promise.reject(`Произошла ошибка: ${res.status}`); // если ошибка, отклоняем промис
 }
-
 }
-
 
 const api = new Api({url: 'https://mesto.nomoreparties.co/v1/cohort-62/cards',
 headers: {
