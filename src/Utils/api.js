@@ -102,4 +102,4 @@ headers: {
  }
 })
 
-export {api}
+export default api;

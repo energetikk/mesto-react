@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { api } from "../utils/api";
+import React, { useEffect } from "react";
+import api from "../utils/api";
 import Card from "./Card";
 
 function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
