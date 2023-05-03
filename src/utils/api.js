@@ -40,8 +40,8 @@ class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: data.nameuser,
-        about: data.jobuser
+        name: data.name,
+        about: data.description
       })})
   .then(this._checkResponse)
 }
@@ -53,7 +53,7 @@ class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: data.link
+        avatar: data.avatar
       })})
   .then(this._checkResponse)
 }
@@ -92,6 +92,26 @@ _checkResponse(res) {
   }
   return Promise.reject(`Произошла ошибка: ${res.status}`); // если ошибка, отклоняем промис
 }
+
+
+
+changeLikeCardStatus(cardId, isLiked) {
+  if (isLiked) {
+    return fetch(`https://mesto.nomoreparties.co/v1/cohort-62/cards/${cardId}/likes`, {
+    method: 'PUT',
+    headers: this._headers
+  })
+  .then(this._checkResponse)
+  } else {
+    return fetch(`https://mesto.nomoreparties.co/v1/cohort-62/cards/${cardId}/likes`, {
+    method: 'DELETE',
+    headers: this._headers
+  })
+  .then(this._checkResponse)
+  }
+}
+
+
 }
 
 const api = new Api({url: 'https://mesto.nomoreparties.co/v1/cohort-62/cards',
@@ -100,5 +120,6 @@ headers: {
  "Content-Type": "application/json"
  }
 })
+
 
 export default api;
