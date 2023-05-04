@@ -1,43 +1,37 @@
-import React, { useContext } from "react"
+import React, { useContext } from "react";
 import { useState } from "react";
 import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function EditProfilePopup({ isOpen, onClose, onSubmit, onUpdateUser}) {
+function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const currentUser = useContext(CurrentUserContext);
 
-    const [name, setName] = useState();
-    const [description, setDescription] = useState();
-    const currentUser = useContext(CurrentUserContext);
+  function handleChangeName(evt) {
+    setName(evt.target.value);
+  }
 
-    function handleChangeName(evt) {
-        setName(evt.target.value)
-    }
+  function handleChangeDescription(evt) {
+    setDescription(evt.target.value);
+  }
 
-    function handleChangeDescription(evt) {
-        setDescription(evt.target.value);
-    }
+  React.useEffect(() => {
+    setName(currentUser.name);
+    setDescription(currentUser.about);
+  }, [currentUser]);
 
-
-
-    React.useEffect(() => {
-        setName(currentUser.name);
-        setDescription(currentUser.about);
-      }, [currentUser]);
-
-      
-    function handleSubmit(evt) {
+  function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
-      evt.preventDefault();
-      
-      // Передаём значения управляемых компонентов во внешний обработчик
-      onUpdateUser({name, description});
-    } 
-          
+    evt.preventDefault();
 
+    // Передаём значения управляемых компонентов во внешний обработчик
+    onUpdateUser({ name, description });
+  }
 
   return (
     <div>
-        <PopupWithForm
+      <PopupWithForm
         name="editprofile"
         title="Редактировать профиль"
         textButton="Сохранить"
@@ -56,7 +50,7 @@ function EditProfilePopup({ isOpen, onClose, onSubmit, onUpdateUser}) {
             name="nameuser"
             className="form__item form__item_el_name"
             onChange={handleChangeName}
-            value={name}
+            value={name || ""}
           />
           <span id="input-name-error" className="popup__error"></span>
           <input
@@ -69,13 +63,13 @@ function EditProfilePopup({ isOpen, onClose, onSubmit, onUpdateUser}) {
             name="jobuser"
             className="form__item form__item_el_job"
             onChange={handleChangeDescription}
-            value={description}
+            value={description || ""}
           />
           <span id="input-job-error" className="popup__error"></span>
         </fieldset>
-      </PopupWithForm>    
+      </PopupWithForm>
     </div>
-  )
-};
+  );
+}
 
 export default EditProfilePopup;

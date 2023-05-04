@@ -1,18 +1,18 @@
-import React from "react"
+import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import { useRef } from "react";
 
+function AddPlacePopup({ isOpen, onClose, onUpdateCards }) {
+  const cardNameRef = useRef();
+  const cardLinkRef = useRef();
 
-function AddPlacePopup({isOpen, onClose, onUpdateCards}) {
-
-    const cardNameRef = useRef();
-    const cardLinkRef = useRef();
-
-    function handleSubmit(evt) {
-        evt.preventDefault();
-        onUpdateCards({name: cardNameRef.current.value, link: cardLinkRef.current.value});
-      }
-
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    onUpdateCards({
+      name: cardNameRef.current.value,
+      link: cardLinkRef.current.value,
+    });
+  }
 
   return (
     <div>
@@ -50,7 +50,7 @@ function AddPlacePopup({isOpen, onClose, onUpdateCards}) {
         </fieldset>
       </PopupWithForm>
     </div>
-  )
-};
+  );
+}
 
 export default AddPlacePopup;

@@ -1,14 +1,19 @@
 import React, { useEffect } from "react";
-import api from "../utils/api";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { useContext } from "react";
 
-
-function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDelete, cards}) {
- 
+function Main({
+  onEditProfile,
+  onAddPlace,
+  onEditAvatar,
+  onCardClick,
+  onCardLike,
+  cards,
+  onConfirmDelete,
+}) {
   const currentUser = useContext(CurrentUserContext);
- 
+
   return (
     <main>
       <section className="profile">
@@ -46,7 +51,13 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike,
       <section className="places">
         <ul className="places__photo-cards">
           {cards.map((card) => (
-            <Card key={card._id} card={card} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete}/>
+            <Card
+              key={card._id}
+              card={card}
+              onCardClick={onCardClick}
+              onCardLike={onCardLike}
+              onConfirmDelete={onConfirmDelete}
+            />
           ))}
         </ul>
       </section>
