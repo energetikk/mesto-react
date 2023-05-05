@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import PopupWithForm from "./PopupWithForm";
-import { useRef } from "react";
 
 function AddPlacePopup({ isOpen, onClose, onUpdateCards }) {
-  const cardNameRef = useRef();
-  const cardLinkRef = useRef();
+  const [name, setName] = useState("");
+  const [link, setLink] = useState("");
+
+  function handleChangeName(evt) {
+    setName(evt.target.value);
+  }
+
+  function handleChangeLink(evt) {
+    setLink(evt.target.value);
+  }
+
+  React.useEffect(() => {
+    setName("");
+    setLink("");
+  }, [isOpen]);
 
   function handleSubmit(evt) {
     evt.preventDefault();
     onUpdateCards({
-      name: cardNameRef.current.value,
-      link: cardLinkRef.current.value,
+      name: name,
+      link: link,
     });
   }
 
@@ -34,7 +46,9 @@ function AddPlacePopup({ isOpen, onClose, onUpdateCards }) {
             name="name"
             placeholder="Название"
             className="form__item form__item_place_name"
-            ref={cardNameRef}
+            // ref={cardNameRef}
+            onChange={handleChangeName}
+            value={name || ""}
           />
           <span id="input-newplace-error" className="popup__error"></span>
           <input
@@ -44,7 +58,9 @@ function AddPlacePopup({ isOpen, onClose, onUpdateCards }) {
             name="link"
             placeholder="Ссылка на картинку"
             className="form__item form__item_place_link"
-            ref={cardLinkRef}
+            // ref={cardLinkRef}
+            onChange={handleChangeLink}
+            value={link || ""}
           />
           <span id="input-link-error" className="popup__error"></span>
         </fieldset>
